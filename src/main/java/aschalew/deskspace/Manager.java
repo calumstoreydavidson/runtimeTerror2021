@@ -1,4 +1,4 @@
-package desksp;
+package aschalew.deskspace;
 
 public class Manager extends  Worker{
 

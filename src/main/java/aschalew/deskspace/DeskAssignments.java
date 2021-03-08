@@ -1,4 +1,4 @@
-package desksp;
+package aschalew.deskspace;
 
 import java.io.File;
 import java.io.FileNotFoundException;

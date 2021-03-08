@@ -19,7 +19,7 @@ public class CloudAdventure {
 
     public static void main(String[] args) {
 
-        String filePath = "F:\\NeonEE\\workspace\\test\\src\\src\\main\\resources\\input\\cloudtest.txt";
+        String filePath = "src/main/resources/cloud.txt";
 
         CloudAdventure ca = new CloudAdventure();
         // read file and set up data structure

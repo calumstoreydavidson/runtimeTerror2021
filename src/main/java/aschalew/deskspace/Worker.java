@@ -1,4 +1,4 @@
-package desksp;
+package aschalew.deskspace;
 
 public class Worker {
     String company;

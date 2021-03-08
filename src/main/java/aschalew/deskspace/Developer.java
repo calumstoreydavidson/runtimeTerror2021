@@ -1,4 +1,4 @@
-package desksp;
+package aschalew.deskspace;
 
 import java.util.List;
 
