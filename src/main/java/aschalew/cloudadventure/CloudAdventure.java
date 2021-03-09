@@ -5,10 +5,15 @@ import java.io.IOException;
 import java.util.*;
 
 public class CloudAdventure {
-    private int noOfProviders = 0;
-    private int noOfServices = 0;
+    private static int MAX_PROVIDER_NR = 20;
+    private static int MAX_SERVICE_NR = 500;
+    private static int MAX_COUNTRIES_NR = 20;
+    private static int MAX_PROJECTS_NR = 100000;
+    private static int MAX_REGIONS_FOR_PROVIDER_NR = 100;
+    private int nrOfProviders = 0;
+    private int nrOfServices = 0;
     private int nrOfCountries = 0;
-    private int noOfProjects = 0;
+    private int nrOfProjects = 0;
     private String[] services;
     private String[] countries;
     private List<Provider> providers = new ArrayList<>();
@@ -217,15 +222,19 @@ public class CloudAdventure {
                 String line = scanner.nextLine();
                 String[] fields = line.split(" ");
                 if (counter == 0){
-                    noOfProviders = Integer.valueOf(fields[0]);
-                    noOfServices = Integer.valueOf(fields[1]);
+                    nrOfProviders = Integer.valueOf(fields[0]);
+                    nrOfServices = Integer.valueOf(fields[1]);
                     nrOfCountries = Integer.valueOf(fields[2]);
-                    noOfProjects = Integer.valueOf(fields[3]);
+                    nrOfProjects = Integer.valueOf(fields[3]);
                     counter++;
                     continue;
                 }
                 if (counter == 1){
-                    services = new String[noOfServices];
+                    if (nrOfServices < 500) {
+                        services = new String[nrOfServices];
+                    } else {
+                        services = new String[MAX_SERVICE_NR];
+                    }
                     for (int i = 0; i < fields.length; i++){
                         services[i] = fields[i];
                     }
@@ -233,7 +242,11 @@ public class CloudAdventure {
                     continue;
                 }
                 if (counter == 2){
-                    countries = new String[nrOfCountries];
+                    if(nrOfCountries < 20) {
+                        countries = new String[nrOfCountries];
+                    } else {
+                        countries = new String[MAX_COUNTRIES_NR];
+                    }
                     for (int i = 0; i < fields.length; i++){
                         countries[i] = fields[i];
                     }
@@ -270,10 +283,14 @@ public class CloudAdventure {
                             latencyMap.put(countries[r], Integer.valueOf(regionFields[r]));
                         }
                         region.setCountryLatency(latencyMap);
-                        regions.add(region);
+                        if (provider.getDataCenters().size() < MAX_REGIONS_FOR_PROVIDER_NR) {
+                            regions.add(region);
+                        }
                         provider.setDataCenters(regions);
                     }
-                    providers.add(provider);
+                    if (providers.size() < MAX_PROVIDER_NR) {
+                        providers.add(provider);
+                    }
 
 
                 }
@@ -291,7 +308,9 @@ public class CloudAdventure {
                         }
                     }
                     project.setUnitsNeededForService(serviceUnits);
-                    projects.add(project);
+                    if (projects.size() < MAX_PROJECTS_NR ) {
+                        projects.add(project);
+                    }
                 }
 
 

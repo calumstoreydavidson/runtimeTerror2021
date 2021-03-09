@@ -29,7 +29,7 @@ public class DeskAssignments {
 
     public static void main(String[] args) {
 
-        String filePath = "F:\\NeonEE\\workspace\\test\\src\\src\\main\\resources\\input\\desk.txt";
+        String filePath = "src/main/resources/desk";
 
         DeskAssignments da = new DeskAssignments();
         da.readFileAndSetupFloor(filePath);
