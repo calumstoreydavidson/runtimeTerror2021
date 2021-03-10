@@ -11,8 +11,6 @@ mac 1 2 nlp big_data
 clstr 3 2 azure c#
 com_vl 6 2 cybersecurity python
 opn 2 3 bpm python project_management
-4
-Reply Code Challenge 2020
 ble 5 4 java c sql junit
 clstr 1 4 python c java bpm
 3
