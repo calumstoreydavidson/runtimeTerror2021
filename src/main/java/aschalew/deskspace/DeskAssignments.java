@@ -29,7 +29,7 @@ public class DeskAssignments {
 
     public static void main(String[] args) {
 
-        String filePath = "src/main/resources/desk";
+        String filePath = "src/main/resources/aschalew/desk";
 
         DeskAssignments da = new DeskAssignments();
         da.readFileAndSetupFloor(filePath);
