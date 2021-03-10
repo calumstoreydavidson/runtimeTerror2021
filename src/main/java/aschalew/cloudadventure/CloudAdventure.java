@@ -24,7 +24,7 @@ public class CloudAdventure {
 
     public static void main(String[] args) {
 
-        String filePath = "src/main/resources/cloud.txt";
+        String filePath = "src/main/resources/cloudtest.txt";
 
         CloudAdventure ca = new CloudAdventure();
         // read file and set up data structure
@@ -49,7 +49,7 @@ public class CloudAdventure {
                     List<Region> regions = countryDatacenters.get(project.getCountry());
                     for (Region region:regions){
                         // calculate average latency
-                        double apl = calculateAverageLatency(region, project);
+                        double apl = calculateAverageLatency(region, project, provider);
                         // calculate availability index
                         double oai = calculateAvailabilityIndex(region, project);
                         // calculate SLA penalty
@@ -132,7 +132,7 @@ public class CloudAdventure {
             2 0 4 2 1 4
             0 1 95 0 2 10 1 0 69 1 1 17 2 0 24 2 1 1 2 2 50
      */
-    private double calculateAverageLatency(Region region, Project project) {
+    private double calculateAverageLatency(Region region, Project project, Provider provider1) {
         // Average project latency = Σ𝑟𝐿𝑟×𝑈𝑟/Σ𝑟𝑈𝑟
         /*
 
@@ -144,10 +144,54 @@ public class CloudAdventure {
             Microsoft-Italy 130
 
             The Average Project Latency(APL) is:
-            numerator: 125* [1*(1+2)] + 130*[3*(5+3)]
+            numerator: 125* [1*(1+2)] + 130*[3*(5+3)]   APL(AI) = Lc * ([Pkg*(su1 + su2)]  APL(MSI) =
             denominator: 1*(1+2) + 3*(5+3)
             if 𝑈𝑟 == 0, then APL= 0
+
+            (75 x 48 + 50 x 144 + 35 x 640) / (48 + 144 + 640)  = 39.9
+            ([50 x 960 + 90] x [165 + 80 x 352 + 35] x [640 + 48 x 500]) / (960 + 165 + 352 + 640 + 500) =
+
+             APL(AI) = Lc * ([Pkg*(su1 + su2)]  APL(MSI) = Lc * ([Pkg*(su1 + su2)]
          */
+        int penalty = project.getPenalty();
+        Map<String, Integer> unitServices = project.getUnitsNeededForService();
+        int allServices = unitServices.values().stream()
+                .reduce(0, Integer::sum);
+        String country = project.getCountry();
+        int apl = 0;
+        int numerator = 0;
+        int denomenator = 0;
+        int aquiredServices = 0;
+        for (String service : unitServices.keySet()) {
+            int servicesNeededInProject = unitServices.get(service);
+            int serviceCounter = 0;
+            for (Provider provider : providers) {
+                for (Region region1 : provider.getDataCenters()) {
+                    int packages = region1.getAvailablePackages();
+                    int latency = region1.getCountryLatency().get(country);
+                    if (aquiredServices < allServices) {
+
+                        int services = region1.getServicesPerPackage().get(service);
+                        if (serviceCounter < servicesNeededInProject) {
+                            aquiredServices += services * packages;
+                            //allServices -= aquiredServices;
+                            serviceCounter += services * packages;
+                            //servicesNeededInProject -= aquiredServices;
+                        } else {
+                            continue;
+                        }
+
+                    }
+                    if (serviceCounter < servicesNeededInProject) {
+                        numerator += latency * servicesNeededInProject;
+                    } else {
+                        continue;
+                    }
+                }
+            }
+        }
+
+
         return 0.0;
     }
 
@@ -268,14 +312,14 @@ public class CloudAdventure {
                         Map<String,Integer> serviceMap = new HashMap<>();
                         for (int m = 0; m < regionFields.length; m++) {
                             if(m == 0){
-                                region.setAvailableServices(Integer.valueOf(regionFields[m]));
+                                region.setAvailablePackages(Integer.valueOf(regionFields[m]));
                             } else if (m == 1) {
                                 region.setUnitCost(Double.valueOf(regionFields[m]));
                             } else {
                                 serviceMap.put(services[m - 2], Integer.valueOf(regionFields[m]));
                             }
                         }
-                        region.setServicePackage(serviceMap);
+                        region.setServicesPerPackage(serviceMap);
                         line = scanner.nextLine();
                         regionFields = line.split(" ");
                         Map<String, Integer> latencyMap = new HashMap<>();
@@ -283,7 +327,7 @@ public class CloudAdventure {
                             latencyMap.put(countries[r], Integer.valueOf(regionFields[r]));
                         }
                         region.setCountryLatency(latencyMap);
-                        if (provider.getDataCenters().size() < MAX_REGIONS_FOR_PROVIDER_NR) {
+                        if (provider.getDataCenters() == null || provider.getDataCenters().size() < MAX_REGIONS_FOR_PROVIDER_NR) {
                             regions.add(region);
                         }
                         provider.setDataCenters(regions);
