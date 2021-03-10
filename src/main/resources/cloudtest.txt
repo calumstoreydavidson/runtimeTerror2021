@@ -1,6 +1,6 @@
 3 3 3 5
 cpu memory disk
-Italy Germany Spain
+Ireland Germany Spain
 Amazon 4
 Milan
 60 0.32 10 5 1
@@ -31,7 +31,7 @@ Dublin
 Sidney
 5000 2.5 10 10 3
 100 170 130
-10000 Italy 1000 0 0
+10000 Ireland 1000 0 0
 1000 Spain 100 60 0
 255000 Italy 20 0 555
 30000 Italy 250 300 780
