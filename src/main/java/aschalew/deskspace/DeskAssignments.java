@@ -144,12 +144,15 @@ public class DeskAssignments {
                     noOfWorker = da.noOfDevs;
                 }*/
 
-                /*if(noOfDevDesks == 0 && "dev".equals(worker)){
-                    devCounter++;
-                    line = "X";
-                    sb.append(line + "\n");
+                if(noOfDevDesks == 0 && "dev".equals(worker)){
+                    int counter = noOfDevs - devCounter;
+                    for (int r = 0; r < counter - noOfWorker; r++) {
+                        devCounter++;
+                        line = "X";
+                        sb.append(line + "\n");
+                    }
                 }
-                if(noOfMgrDesks == 0 && "mgr".equals(worker)){
+                /*if(noOfMgrDesks == 0 && "mgr".equals(worker)){
                     devCounter++;
                     line = "X";
                     sb.append(line + "\n");

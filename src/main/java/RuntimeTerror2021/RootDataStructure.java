@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 public class RootDataStructure {
 
+    public static final String DELIMITER = " ";
     private ArrayList<ArrayList<String>> grid = new ArrayList<ArrayList<String>>();
     private int yRowsSize;
     private int xColoumnsSize;
+    private int lineCounter = 0;
+
 
     public RootDataStructure(ArrayList<String> inputLines) {
         inputLines.forEach(this::processInputLine);
@@ -22,6 +25,8 @@ public class RootDataStructure {
 
     // custom code here
     private void processInputLine(String line) {
+        String[] fields = line.split(DELIMITER);
+
         if (line.equals("c1")) {//"criteria1"
             int yRowsSize = 7;
             int xColoumnsSize = 8;
