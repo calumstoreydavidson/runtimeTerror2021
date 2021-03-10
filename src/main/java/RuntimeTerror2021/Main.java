@@ -7,8 +7,9 @@ import static java.util.Arrays.asList;
 public class Main {
 
     private static final ArrayList<String> fileNames = new ArrayList<>(asList(
-            "a_solar.txt",
-            "b_dream.txt"
+//            "a_solar.txt",
+//            "b_dream.txt",
+            "placholder-input.txt"
     ));
 
     public static void main(String[] args) {
