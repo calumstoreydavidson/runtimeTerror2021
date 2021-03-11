@@ -30,15 +30,7 @@ public class Building {
     }
 
     private boolean inRange(int range, int x, int y) {
-        return getAbsDiff(coord.x_col, x) <= range && getAbsDiff(coord.y_row, y) <= range;
-    }
-
-    private int getAbsDiff(int int1, int int2) {
-        int result = int1 - int2;
-        if (result < 0) {
-            result *= -1;
-        }
-        return result;
+        return UtilMethods.getAbsDiff(coord.x_col, x) <= range && UtilMethods.getAbsDiff(coord.y_row, y) <= range;
     }
 
     public int getX_coord() {
