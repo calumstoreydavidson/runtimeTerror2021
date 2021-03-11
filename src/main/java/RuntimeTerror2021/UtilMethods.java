@@ -1,6 +1,7 @@
 package RuntimeTerror2021;
 
 import java.lang.Math;
+import java.util.ArrayList;
 
 public class UtilMethods {
     public static int getManhattanDistance(Coord a, Coord b) {
@@ -19,6 +20,24 @@ public class UtilMethods {
         int manhattenDistance = UtilMethods.getManhattanDistance(a, b);
         int score = (building.getConnectionSpeedWeight() * antenna.getConnectionSpeed()) - building.getLatencyWeight() * manhattenDistance;
         return score;
+    }
+
+    public static Coord calculateHighestScore(ArrayList<Coord> commonCords, Building building, Antenna antenna) {
+        Coord highestScoringCoord = null;
+        int highestScore = 0;
+
+        for(Coord coord : commonCords) {
+            antenna.setTemp_x_coord(coord.getX_col());
+            antenna.setTemp_y_coord(coord.getY_row());
+
+            int score = calculateScore(building, antenna);
+
+            if(score > highestScore) {
+                highestScore = score;
+                highestScoringCoord = new Coord(coord.getX_col(), coord.getY_row());
+            }
+        }
+        return highestScoringCoord;
     }
 }
 
