@@ -16,10 +16,10 @@ public class RootDataStructure {
 
         buildDataStructures();
 
-        test();
+        testGetPointsInRange();
     }
 
-    private void test(){
+    private void testGetPointsInRange() {
         Building building = buildings.get(2);
         ArrayList<Coord> pointsInRange = building.getPointsInRange(1, inputData.getXColumnsSize(), inputData.getYRowsSize());
         System.out.println();
@@ -28,6 +28,16 @@ public class RootDataStructure {
         pointsInRange.forEach(coord -> System.out.println(coord.x_col + ":" + coord.y_row));
     }
 
+    public ArrayList<ArrayList<Coord>> getValidAntennaLocations() {
+        ArrayList<ArrayList<Coord>> validAntennaLocations = new ArrayList<>();
+        for (Antenna antenna : antennas) {
+            int range = antenna.getRange();
+            for (Building building : buildings) {
+                validAntennaLocations.add(building.getPointsInRange(range, inputData.getXColumnsSize(), inputData.getYRowsSize()));
+            }
+        }
+        return validAntennaLocations;
+    }
 
     // custom code here
     private void buildDataStructures() {
