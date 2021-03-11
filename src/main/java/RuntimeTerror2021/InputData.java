@@ -13,9 +13,6 @@ public class InputData {
     private int M_antennasOnGrid;
     private int R_allBuildingsConnectedReward;
 
-    private int devCount;
-    private int managerCount;
-
     private ArrayList<ArrayList<String>> buildingInputLines;
     private ArrayList<ArrayList<String>> antennaInputLines;
     private ArrayList<String> managerInputLines;
@@ -55,7 +52,6 @@ public class InputData {
             }
         }
 
-//        devCount = Integer.parseInt(inputLines.get(M_antennasOnGrid + 1));
         int M_antennasOnGridDecrementer = M_antennasOnGrid;
         // starts 3 + N_buildingsOnGrid = 2 + N_buildingsOnGrid
         for (int i = N_buildingsOnGrid + 2; i < inputLines.size(); i++) {
@@ -65,15 +61,6 @@ public class InputData {
                 M_antennasOnGridDecrementer--;
             }
         }
-
-//        managerCount = Integer.parseInt(inputLines.get(H_yRowsSize + devCount + 2));
-//        int managerCountDecrementer = managerCount;
-//        for (int i = H_yRowsSize + devCount + 3; i < inputLines.size(); i++) {
-//            if (managerCountDecrementer > 0) {
-//                managerInputLines.add(inputLines.get(i));
-//                managerCountDecrementer--;
-//            }
-//        }
 
         ArrayList<Integer> inputDataNumerics = new ArrayList<>(asList(
                 W_xColumnsSize,
@@ -99,14 +86,6 @@ public class InputData {
 
     public int getXColumnsSize() {
         return W_xColumnsSize;
-    }
-
-    public int getDevCount() {
-        return devCount;
-    }
-
-    public int getManagerCount() {
-        return managerCount;
     }
 
     public ArrayList<ArrayList<String>> getBuildingInputLines() {

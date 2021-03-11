@@ -1,5 +1,7 @@
 package RuntimeTerror2021;
 
+import java.util.ArrayList;
+
 public class Building {
     private int x_coord;
     private int y_coord;
@@ -11,6 +13,10 @@ public class Building {
         this.y_coord = Integer.parseInt(y_coord);
         this.latencyWeight = Integer.parseInt(latencyWeight);
         this.connectionSpeedWeight = Integer.parseInt(connectionSpeedWeight);
+    }
+
+    public ArrayList<> getRange(){
+
     }
 
     public int getX_coord() {
