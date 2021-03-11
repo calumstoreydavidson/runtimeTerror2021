@@ -15,6 +15,9 @@ public class RootDataStructure {
         inputData = new InputData(inputLines);
 
         buildDataStructures();
+
+        ArrayList<Coord> pointsInRange = buildings.get(0).getPointsInRange(4, inputData.getXColumnsSize(), inputData.getYRowsSize());
+        pointsInRange.forEach(coord -> System.out.println(coord.x_col + ":" + coord.y_row));
     }
 
     // custom code here
