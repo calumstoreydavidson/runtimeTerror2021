@@ -16,7 +16,24 @@ public class RootDataStructure {
 
         buildDataStructures();
 
-        testGetPointsInRange();
+//        testGetPointsInRange();
+//        testGetValidAntennaLocationLists();
+
+//        ArrayList<ArrayList<Coord>> validAntennaLocationLists = getValidAntennaLocationLists();
+//        for (ArrayList<Coord> antennaLocationList: validAntennaLocationLists) {
+//            for (ArrayList<Coord> antennaLocationList: validAntennaLocationLists) {
+//
+//            }
+//        }
+    }
+
+    private void testGetValidAntennaLocationLists() {
+        getValidAntennaLocationLists().forEach(antennaLocationList -> {
+            antennaLocationList.forEach(coord -> {
+                System.out.println(coord.x_col + ":" + coord.y_row);
+            });
+            System.out.println();
+        });
     }
 
     private void testGetPointsInRange() {
@@ -28,7 +45,7 @@ public class RootDataStructure {
         pointsInRange.forEach(coord -> System.out.println(coord.x_col + ":" + coord.y_row));
     }
 
-    public ArrayList<ArrayList<Coord>> getValidAntennaLocations() {
+    public ArrayList<ArrayList<Coord>> getValidAntennaLocationLists() {
         ArrayList<ArrayList<Coord>> validAntennaLocations = new ArrayList<>();
         for (Antenna antenna : antennas) {
             int range = antenna.getRange();
