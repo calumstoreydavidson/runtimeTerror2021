@@ -4,7 +4,6 @@ public class Worker {
     String company;
     String bonusPotential;
 
-
     public Worker() {
     }
 

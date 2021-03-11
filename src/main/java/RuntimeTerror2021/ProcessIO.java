@@ -14,6 +14,7 @@ public class ProcessIO {
 
     public final String INPUT_DIR = "src/main/resources/runtimeTerror2021/input/";
     public final String OUTPUT_DIR = "src/main/resources/runtimeTerror2021/output/";
+    public static final String DELIMITER = " ";
 
     public ArrayList<String> getInputLines(String filePath) {
         ArrayList<String> inputLines = new ArrayList<>();
