@@ -16,9 +16,9 @@ public class InputData {
     private int devCount;
     private int managerCount;
 
-    ArrayList<ArrayList<String>> buildingInputLines;
-    ArrayList<ArrayList<String>> antennaInputLines;
-    ArrayList<String> managerInputLines;
+    private ArrayList<ArrayList<String>> buildingInputLines;
+    private ArrayList<ArrayList<String>> antennaInputLines;
+    private ArrayList<String> managerInputLines;
 
     public InputData(ArrayList<String> inputLines) {
         buildingInputLines = new ArrayList<>();
