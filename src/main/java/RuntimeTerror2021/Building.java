@@ -8,7 +8,7 @@ public class Building {
     private int connectionSpeedWeight;
 
     public Building(String x_coord, String y_coord, String latencyWeight, String connectionSpeedWeight) {
-        this.coord = new Coord(Integer.parseInt(y_coord, Integer.parseInt(x_coord));
+        this.coord = new Coord(Integer.parseInt(y_coord), Integer.parseInt(x_coord));
         this.latencyWeight = Integer.parseInt(latencyWeight);
         this.connectionSpeedWeight = Integer.parseInt(connectionSpeedWeight);
     }
