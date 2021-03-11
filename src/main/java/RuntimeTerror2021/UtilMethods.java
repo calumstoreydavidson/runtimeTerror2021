@@ -14,6 +14,14 @@ public class UtilMethods {
         }
         return result;
     }
+    public static int calculateScore(Building building, Antenna antenna){
+        Coord a  = new Coord(building.getX_coord(), building.getY_coord());
+        Coord b  = new Coord(building.getX_coord(), antenna.getTemp_y_coord());
+        int manhattenDistance = UtilMethods.getManhattanDistance(a, b);
+        int score = (building.getConnectionSpeedWeight() * antenna.getConnectionSpeed()) - building.getLatencyWeight() * manhattenDistance;
+        return score;
+    }
+
 }
 
 
