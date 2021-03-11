@@ -2,7 +2,7 @@ package RuntimeTerror2021;
 
 import java.util.ArrayList;
 
-import static RuntimeTerror2021.RootDataStructure.DELIMITER;
+import static RuntimeTerror2021.ProcessIO.DELIMITER;
 import static java.util.Arrays.asList;
 
 public class InputData {
@@ -16,18 +16,7 @@ public class InputData {
     ArrayList<String> devInputLines;
     ArrayList<String> managerInputLines;
 
-//    public InputData(int yRowsSize, int xColumnsSize, int devCount, int managerCount, ArrayList<String> gridInputLines,
-//                     ArrayList<String> devInputLines, ArrayList<String> managerInputLines) {
-//        this.yRowsSize = yRowsSize;
-//        this.xColumnsSize = xColumnsSize;
-//        this.devCount = devCount;
-//        this.managerCount = managerCount;
-//        this.gridInputLines = gridInputLines;
-//        this.devInputLines = devInputLines;
-//        this.managerInputLines = managerInputLines;
-//    }
-
-    public InputData(ArrayList<String> inputLines){
+    public InputData(ArrayList<String> inputLines) {
         gridInputLines = new ArrayList<>();
         devInputLines = new ArrayList<>();
         managerInputLines = new ArrayList<>();
@@ -43,10 +32,9 @@ public class InputData {
 
         int gridSizeDecrementer = yRowsSize;
         for (int i = 1; i < inputLines.size(); i++) {
-            // do for YRowsSize Rows after row 1
 
+            //floor map
             if (gridSizeDecrementer > 0) {
-                //floor map
 //                inputLineGroups.add(new ArrayList<>(asList(inputLines.get(i).split(""))));
                 gridInputLines.add(new ArrayList<>(asList(inputLines.get(i).split(""))));
 //                gridInputLines.add(inputLines.get(i));
@@ -58,7 +46,7 @@ public class InputData {
 
         devCount = Integer.parseInt(inputLines.get(yRowsSize + 1));
         int devCountDecrementer = devCount;
-        for (int i = yRowsSize + 3; i < inputLines.size(); i++) {
+        for (int i = yRowsSize + 2; i < inputLines.size(); i++) {
             if (devCountDecrementer > 0) {
                 devInputLines.add(inputLines.get(i));
                 devCountDecrementer--;
@@ -80,15 +68,13 @@ public class InputData {
                 devCount,
                 managerCount));
 
-        ArrayList<ArrayList<String>> inputLineGroups = new ArrayList<>(asList(
-                devInputLines,
-                managerInputLines));
-
         inputDataNumerics.forEach(System.out::println);
         System.out.println();
         gridInputLines.forEach(System.out::println);
         System.out.println();
-        inputLineGroups.forEach(System.out::println);
+        devInputLines.forEach(System.out::println);
+        System.out.println();
+        managerInputLines.forEach(System.out::println);
     }
 
     public int getYRowsSize() {
