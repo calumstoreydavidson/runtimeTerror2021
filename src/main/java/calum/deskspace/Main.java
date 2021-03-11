@@ -1,4 +1,4 @@
-package RuntimeTerror2021;
+package calum.deskspace;
 
 import java.util.ArrayList;
 
@@ -7,8 +7,6 @@ import static java.util.Arrays.asList;
 public class Main {
 
     private static final ArrayList<String> fileNames = new ArrayList<>(asList(
-//            "a_solar.txt",
-//            "b_dream.txt",
             "data_scenarios_a_example.txt"
     ));
 

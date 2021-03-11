@@ -7,18 +7,19 @@ import static java.util.Arrays.asList;
 
 public class InputData {
 
-    private int yRowsSize;
-    private int xColumnsSize;
-    private int devCount;
-    private int managerCount;
+    private int H_yRowsSize;
+    private int W_xColumnsSize;
+    private int N_buildingsOnGrid;
+    private int M_antennasOnGrid;
+    private int R_allBuildingsConnectedReward;
 
-    ArrayList<ArrayList<String>> gridInputLines;
-    ArrayList<String> devInputLines;
-    ArrayList<String> managerInputLines;
+    private ArrayList<ArrayList<String>> buildingInputLines;
+    private ArrayList<ArrayList<String>> antennaInputLines;
+    private ArrayList<String> managerInputLines;
 
     public InputData(ArrayList<String> inputLines) {
-        gridInputLines = new ArrayList<>();
-        devInputLines = new ArrayList<>();
+        buildingInputLines = new ArrayList<>();
+        antennaInputLines = new ArrayList<>();
         managerInputLines = new ArrayList<>();
 
         splitInputSections(inputLines);
@@ -27,78 +28,72 @@ public class InputData {
     private void splitInputSections(ArrayList<String> inputLines) {
         //Row 1
         ArrayList<String> gridAxis = new ArrayList<>(asList(inputLines.get(0).split(DELIMITER)));
-        xColumnsSize = Integer.parseInt(gridAxis.get(0));
-        yRowsSize = Integer.parseInt(gridAxis.get(1));
+        W_xColumnsSize = Integer.parseInt(gridAxis.get(0));
+        H_yRowsSize = Integer.parseInt(gridAxis.get(1));
 
-        int gridSizeDecrementer = yRowsSize;
-        for (int i = 1; i < inputLines.size(); i++) {
+        //Row 2
+        ArrayList<String> stuff = new ArrayList<>(asList(inputLines.get(1).split(DELIMITER)));
+        N_buildingsOnGrid = Integer.parseInt(stuff.get(0));
+        M_antennasOnGrid = Integer.parseInt(stuff.get(1));
+        R_allBuildingsConnectedReward = Integer.parseInt(stuff.get(2));
 
-            //floor map
-            if (gridSizeDecrementer > 0) {
+        int N_buildingsOnGridDecrementer = N_buildingsOnGrid;
+        //starts line 3 = 2
+        for (int i = 2; i < inputLines.size(); i++) {
+
+            //building map
+            if (N_buildingsOnGridDecrementer > 0) {
 //                inputLineGroups.add(new ArrayList<>(asList(inputLines.get(i).split(""))));
-                gridInputLines.add(new ArrayList<>(asList(inputLines.get(i).split(""))));
-//                gridInputLines.add(inputLines.get(i));
-                gridSizeDecrementer--;
+                buildingInputLines.add(new ArrayList<>(asList(inputLines.get(i).split(" "))));
+//                buildingInputLines.add(inputLines.get(i));
+                N_buildingsOnGridDecrementer--;
             } else {
                 continue;
             }
         }
 
-        devCount = Integer.parseInt(inputLines.get(yRowsSize + 1));
-        int devCountDecrementer = devCount;
-        for (int i = yRowsSize + 2; i < inputLines.size(); i++) {
-            if (devCountDecrementer > 0) {
-                devInputLines.add(inputLines.get(i));
-                devCountDecrementer--;
-            }
-        }
-
-        managerCount = Integer.parseInt(inputLines.get(yRowsSize + devCount + 2));
-        int managerCountDecrementer = managerCount;
-        for (int i = yRowsSize + devCount + 3; i < inputLines.size(); i++) {
-            if (managerCountDecrementer > 0) {
-                managerInputLines.add(inputLines.get(i));
-                managerCountDecrementer--;
+        int M_antennasOnGridDecrementer = M_antennasOnGrid;
+        // starts 3 + N_buildingsOnGrid = 2 + N_buildingsOnGrid
+        for (int i = N_buildingsOnGrid + 2; i < inputLines.size(); i++) {
+            if (M_antennasOnGridDecrementer > 0) {
+                antennaInputLines.add(new ArrayList<>(asList(inputLines.get(i).split(" "))));
+//                antennaInputLines.add(inputLines.get(i));
+                M_antennasOnGridDecrementer--;
             }
         }
 
         ArrayList<Integer> inputDataNumerics = new ArrayList<>(asList(
-                yRowsSize,
-                xColumnsSize,
-                devCount,
-                managerCount));
+                W_xColumnsSize,
+                H_yRowsSize,
+                N_buildingsOnGrid,
+                M_antennasOnGrid,
+                R_allBuildingsConnectedReward));
 
         inputDataNumerics.forEach(System.out::println);
         System.out.println();
-        gridInputLines.forEach(System.out::println);
+
+        buildingInputLines.forEach(System.out::println);
         System.out.println();
-        devInputLines.forEach(System.out::println);
+
+        antennaInputLines.forEach(System.out::println);
+        System.out.println("----input consumption finished----");
         System.out.println();
-        managerInputLines.forEach(System.out::println);
     }
 
     public int getYRowsSize() {
-        return yRowsSize;
+        return H_yRowsSize;
     }
 
     public int getXColumnsSize() {
-        return xColumnsSize;
+        return W_xColumnsSize;
     }
 
-    public int getDevCount() {
-        return devCount;
+    public ArrayList<ArrayList<String>> getBuildingInputLines() {
+        return buildingInputLines;
     }
 
-    public int getManagerCount() {
-        return managerCount;
-    }
-
-    public ArrayList<ArrayList<String>> getGridInputLines() {
-        return gridInputLines;
-    }
-
-    public ArrayList<String> getDevInputLines() {
-        return devInputLines;
+    public ArrayList<ArrayList<String>> getAntennaInputLines() {
+        return antennaInputLines;
     }
 
     public ArrayList<String> getManagerInputLines() {
