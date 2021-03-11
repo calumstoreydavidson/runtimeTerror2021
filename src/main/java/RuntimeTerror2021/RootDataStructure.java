@@ -16,9 +16,18 @@ public class RootDataStructure {
 
         buildDataStructures();
 
-        ArrayList<Coord> pointsInRange = buildings.get(0).getPointsInRange(4, inputData.getXColumnsSize(), inputData.getYRowsSize());
+        test();
+    }
+
+    private void test(){
+        Building building = buildings.get(2);
+        ArrayList<Coord> pointsInRange = building.getPointsInRange(1, inputData.getXColumnsSize(), inputData.getYRowsSize());
+        System.out.println();
+        System.out.println("building at: " + building.getX_coord() + ":" + building.getY_coord());
+        System.out.println("valid coords in range of 1:");
         pointsInRange.forEach(coord -> System.out.println(coord.x_col + ":" + coord.y_row));
     }
+
 
     // custom code here
     private void buildDataStructures() {

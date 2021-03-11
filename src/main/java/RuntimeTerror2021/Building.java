@@ -19,7 +19,6 @@ public class Building {
         //TODO inefficient!!!!!
         for (int i = 0; i < W_xColumnsSize; i++) {
             for (int j = 0; j < H_yRowsSize; j++) {
-                //manhattan distance?
                 if (inRange(range, i, j)) {
                     pointsInRange.add(new Coord(i, j));
                 }
@@ -29,8 +28,9 @@ public class Building {
         return pointsInRange;
     }
 
+    //manhattan distance?
     private boolean inRange(int range, int x, int y) {
-        return UtilMethods.getAbsDiff(coord.x_col, x) <= range && UtilMethods.getAbsDiff(coord.y_row, y) <= range;
+        return UtilMethods.getManhattanDistance(coord, new Coord(x,y)) <= range;
     }
 
     public int getX_coord() {
