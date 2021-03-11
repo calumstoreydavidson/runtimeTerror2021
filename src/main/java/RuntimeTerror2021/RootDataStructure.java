@@ -20,7 +20,9 @@ public class RootDataStructure {
     private void buildDataStructures() {
         //convert developer input lines, into developer objects, etc
         inputData.buildingInputLines.forEach(buildingLine -> {
-
+            buildings.add(new Building(buildingLine.get(0), buildingLine.get(1), buildingLine.get(2), buildingLine.get(3)));
+            System.out.println(buildingLine);
         });
+        System.out.println();
     }
 }

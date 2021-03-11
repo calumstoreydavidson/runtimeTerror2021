@@ -48,7 +48,7 @@ public class InputData {
             if (N_buildingsOnGridDecrementer > 0) {
 //                inputLineGroups.add(new ArrayList<>(asList(inputLines.get(i).split(""))));
                 buildingInputLines.add(new ArrayList<>(asList(inputLines.get(i).split(" "))));
-//                gridInputLines.add(inputLines.get(i));
+//                buildingInputLines.add(inputLines.get(i));
                 N_buildingsOnGridDecrementer--;
             } else {
                 continue;
@@ -61,6 +61,7 @@ public class InputData {
         for (int i = N_buildingsOnGrid + 2; i < inputLines.size(); i++) {
             if (M_antennasOnGridDecrementer > 0) {
                 antennaInputLines.add(new ArrayList<>(asList(inputLines.get(i).split(" "))));
+//                antennaInputLines.add(inputLines.get(i));
                 M_antennasOnGridDecrementer--;
             }
         }
@@ -83,9 +84,13 @@ public class InputData {
 
         inputDataNumerics.forEach(System.out::println);
         System.out.println();
+
         buildingInputLines.forEach(System.out::println);
         System.out.println();
+
         antennaInputLines.forEach(System.out::println);
+        System.out.println("----input consumption finished----");
+        System.out.println();
     }
 
     public int getYRowsSize() {
